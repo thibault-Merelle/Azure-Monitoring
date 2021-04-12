@@ -20,7 +20,6 @@ app.use((req, res, next) => {
 });
 
 app.get("/total", (req, res)=> {
-
     request.query(
       "SELECT SUM(Cost) as total FROM [dbo].[monitoring3]",
       (err, result) => {
@@ -35,22 +34,29 @@ app.get("/total", (req, res)=> {
 })
 
 app.get("/Localisation/:search", (req, res) => {
+
+    const {search} = req.params;
+
     request.query(
       `SELECT SUM(Cost) FROM [dbo].[monitoring3] WHERE SubscriptionName = '${search}'`,
       (err, result) => {
-        console.log(err, result);
-        const totale = Math.round(result.recordset[0].total * 100) / 100;
+        console.log(search);
+        const totale = Math.round(Object.values(result.recordset[0]) * 100) / 100;
         const rep = `${totale} euros`;
         res.send(rep);
       }
     );
 })
 app.get("/Ressource/:search", (req, res) => {
+
+    const {search} = req.params;
+
     request.query(
-      `SELECT SUM(Cost) as total FROM [dbo].[monitoring3] WHERE ServiceName = '${search}' `,
+      `SELECT SUM(Cost) as total FROM [dbo].[monitoring3] WHERE ServiceName = '${search}'`,
       (err, result) => {
         console.log(err, result);
-        const totale = Math.round(result.recordset[0].total * 100) / 100;
+        const totale =
+          Math.round(Object.values(result.recordset[0]) * 100) / 100;
         const rep = `${totale} euros`;
         res.send(rep);
       }
