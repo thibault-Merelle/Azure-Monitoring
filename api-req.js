@@ -1,45 +1,59 @@
 const express = require('express')
 const app = express()
-const { Pool, Client } = require("pg");
+const sql = require("mssql");
 
-const pool = new Pool({
-  user: "yomathi@yomathi",
-  host: "yomathi.postgres.database.azure.com",
-  database: "postgres",
+
+
+const config = {
+  user: "yomathi",
   password: "youcef28?",
-  port: "5432",
-});
+  server: "yomathisql.database.windows.net",
+  database: "monitoringdata",
+};
+
+sql.connect(config)
+var request = new sql.Request();
 
 app.use((req, res, next) => {
-  console.log("middleware");
   res.set("Access-Control-Allow-Origin", "*");
   next();
 });
 
 app.get("/total", (req, res)=> {
-    pool.query("SELECT SUM(Cost) as total FROM test", (err, res) => {
-      console.log(err, res);
-      pool.end();
-    });
+
+    request.query(
+      "SELECT SUM(Cost) as total FROM [dbo].[monitoring3]",
+      (err, result) => {
+        console.log(err, result);
+        const totale = Math.round((result.recordset[0].total)*100)/100
+        const rep = `${totale} euros`;
+        res.send(rep);
+      }
+    );
+    // res.json({id : "salut"})
     
 })
 
 app.get("/Localisation/:search", (req, res) => {
-    pool.query(
-      `SELECT SUM(Cost) as total FROM test WHERE SubscriptionName LIKE "%${search}%" `,
-      (err, res) => {
-        console.log(err, res);
-        pool.end();
+    request.query(
+      `SELECT SUM(Cost) FROM [dbo].[monitoring3] WHERE SubscriptionName = '${search}'`,
+      (err, result) => {
+        console.log(err, result);
+        const totale = Math.round(result.recordset[0].total * 100) / 100;
+        const rep = `${totale} euros`;
+        res.send(rep);
       }
     );
 })
 app.get("/Ressource/:search", (req, res) => {
-    pool.query(
-        `SELECT SUM(Cost) as total FROM test WHERE ServiceName LIKE "%${search}%" `,
-        (err, res) => {
-        console.log(err, res);
-        pool.end();
-        }
+    request.query(
+      `SELECT SUM(Cost) as total FROM [dbo].[monitoring3] WHERE ServiceName = '${search}' `,
+      (err, result) => {
+        console.log(err, result);
+        const totale = Math.round(result.recordset[0].total * 100) / 100;
+        const rep = `${totale} euros`;
+        res.send(rep);
+      }
     );
 })
 

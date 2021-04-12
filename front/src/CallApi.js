@@ -3,23 +3,13 @@ import React, { useEffect, useState } from "react";
 
 const search = { Search1 : function () {
     const [search1, setSearch1] = useState();
-    const [search, setSearch] = useState();
     return (
       <div className="search1">
-        <form>
-          <input
-            value={search}
-            type="text"
-            placeholder="Tapez ???"
-            onChange={(e) => {
-              setSearch(e.target.value);
-            }}
-          />
-        </form>
+        <p className="nameInput">Totale de Consommation</p>
         <div className="btn">
           <button
             onClick={async () => {
-              const res = await axios(`http://localhost:4000/total/${search}`);
+              const res = await axios(`http://localhost:4000/total`);
               setSearch1(res.data);
             }}
           >
@@ -27,7 +17,7 @@ const search = { Search1 : function () {
             <br />
           </button>
         </div>
-        <div className="result"></div>
+        <div className="result">{search1}</div>
       </div>
     );
 },
@@ -39,16 +29,14 @@ Search2 : function () {
   const [search, setSearch] = useState();
   return (
     <div className="search1">
-      <form>
-        <input
-          value={search}
-          type="text"
-          placeholder="Tapez le nom d'une localisation"
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
-      </form>
+      <select value="Radish">
+        <option value="Orange">Orange</option>
+        <option value="Radish">Radish</option>
+        <option value="Cherry">Cherry</option>
+        <option value="Cherry">Cherry</option>
+        <option value="Cherry">Cherry</option>
+        <option value="Cherry">Cherry</option>
+      </select>
       <div className="btn">
         <button
           onClick={async () => {

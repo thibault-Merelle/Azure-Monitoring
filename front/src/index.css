@@ -64,4 +64,10 @@ input {
 
 .search1 {
  margin: 5rem;
+ background-color: #e7e7de;
+ padding: 2rem 0.9rem;
+ border-radius: 1.5rem;
+}
+.nameInput {
+  color: #0f3057;
 }
