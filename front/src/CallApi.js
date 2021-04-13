@@ -10,7 +10,9 @@ const search = { Search1 : function () {
         <div className="btn">
           <button
             onClick={async () => {
-              const res = await axios(`http://localhost:4000/total`);
+              const res = await axios(
+                `https://yomathiapp.azurewebsites.net/total`
+              );
               setSearch1(res.data);
             }}
           >
@@ -61,7 +63,7 @@ Search2 : function () {
         <button
           onClick={async () => {
             const res = await axios(
-              `http://localhost:4000/Localisation/${search}`
+              `https://yomathiapp.azurewebsites.net/Localisation/${search}`
             );
             setResult(res.data);
           }}
@@ -109,7 +111,7 @@ Search3 : function () {
         <button
           onClick={async () => {
             const res = await axios(
-              `http://localhost:4000/Ressource/${search2}`
+              `https://yomathiapp.azurewebsites.net/Ressource/${search2}`
             );
             setResult2(res.data);
           }}
