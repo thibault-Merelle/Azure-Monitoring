@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const sql = require("mssql");
 const port = process.env.PORT || 4000;
+const cors = require("cors");
+app.use(cors());
 
 
 const config = {
@@ -14,10 +16,10 @@ const config = {
 sql.connect(config)
 var request = new sql.Request();
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   next();
+// });
 
 
 app.get("/total", (req, res)=> {
