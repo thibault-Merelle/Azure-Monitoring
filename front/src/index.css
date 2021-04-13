@@ -38,7 +38,7 @@ header {
   align-items: center;
   width: 25%;
   height : 20rem;
-  margin: 2rem auto;
+  margin: 1rem auto;
   background-color: #008891;
   border-radius: 1rem;
 }
@@ -63,11 +63,25 @@ input {
 }
 
 .search1 {
- margin: 5rem;
+ margin: 3.5rem;
  background-color: #e7e7de;
  padding: 2rem 0.9rem;
  border-radius: 1.5rem;
 }
 .nameInput {
   color: #0f3057;
+}
+
+.result {
+  background-color: #008891;
+  /* padding: 1rem; */
+  border-radius: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #e7e7de;
+}
+.logo img {
+  width: 50px;
+  height: 50px;
+  margin: 0 1rem;
 }

@@ -1,4 +1,5 @@
 import search from "./CallApi";
+import logo from "./logo.jpg"
 
 function App() {
   return (
@@ -6,7 +7,7 @@ function App() {
       <header className="App-header">
         <div className="logo">
           <img
-            src="../public/logo-simplon.jpg"
+            src={logo}
             className="App-logo"
             alt="logo"
           />
@@ -25,6 +26,10 @@ function App() {
         </div>
       </div>
     </div>
+    // <div className="test">
+    //   <Test />
+    // </div>
+    
   );
 }
 
