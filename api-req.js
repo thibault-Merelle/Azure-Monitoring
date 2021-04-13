@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const sql = require("mssql");
 const port = process.env.PORT || 4000;
-const cors = require("cors");
-app.use(cors());
+// const cors = require("cors");
+// app.use(cors());
 
 
 const config = {
@@ -15,6 +15,16 @@ const config = {
 
 sql.connect(config)
 var request = new sql.Request();
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://monitoringyoussef.z5.web.core.windows.net"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
 
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
