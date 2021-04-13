@@ -15,13 +15,10 @@ sql.connect(config)
 var request = new sql.Request();
 
 app.use((req, res, next) => {
-  res.set("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
-app.get("/", (req, res) => {
-  res.json({"message" : "salut"})
-})
 
 app.get("/total", (req, res)=> {
     request.query(
