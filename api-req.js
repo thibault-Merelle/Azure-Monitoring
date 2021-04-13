@@ -19,6 +19,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.json({"message" : "salut"})
+})
+
 app.get("/total", (req, res)=> {
     request.query(
       "SELECT SUM(Cost) as total FROM [dbo].[monitoring3]",
