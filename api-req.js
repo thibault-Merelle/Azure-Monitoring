@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const sql = require("mssql");
-
+const port = process.env.PORT || 4000;
 
 
 const config = {
@@ -63,4 +63,6 @@ app.get("/Ressource/:search", (req, res) => {
     );
 })
 
-// app.listen(4000)
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
